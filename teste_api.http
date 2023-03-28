@@ -1,0 +1,39 @@
+### rota de login com o usário
+POST https://psel.apoena.shinier.com.br/api/login HTTP/1.1
+content-type: application/json
+
+
+{
+   "email": "mari.kaori12@gmail.com",
+   "group_key": "Client",
+   "password":"K@0r1@2023"
+}
+
+
+### rota de carregar o import retorna a diferença entre o esperado e o enviado
+POST https://psel.apoena.shinier.com.br/api/import/create HTTP/1.1
+content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5OGM4ZGZhOS0zZWMwLTQ4MmUtYTA4ZC1lOGJlYzhhYmEwNDYiLCJqdGkiOiJlZjhhZGFkYTczNmNjOTJkZmI4NGY4YTZkODgzMjA2NjdlNzZmODFkZjRkNDQxMThhODU0M2JmOWNiZTc5NzRkY2Y1ZDFlNWIxNmJmNzU4MCIsImlhdCI6MTY4MDAzMTAxNi4zNjE0OTIsIm5iZiI6MTY4MDAzMTAxNi4zNjE0OTYsImV4cCI6MTcxMTY1MzQxNi4zNTIzOTcsInN1YiI6IjE3NDlkZmVlLThmMWMtNDRiMC1hNGFhLTk0YTBmYzBhOTAwOCIsInNjb3BlcyI6W119.Py7jxSQ4Vj3O3doFjBSDuwOp84-PPev1CWRoG3JrTNN7Smvm7renyyfbEB9ap3FyvlgjUY2qoHR844XKMDcggRGZTDXL3Xumt0eMDCsppU8AnYMX8GxB5HGBzve-M4kF_7TseJzghD5JsiVbyD5MBaRjnYzWNaZWovrYqv3lvoSjfXg_CX_Icqp0qS8316-qYcXKLOUMHOJyOEu0WAR1HFD4ZMH9SHN6KXsLikCKwuv7TYLXsL3jYchzDvzXeXsaE6fe3qkxlCdnviudevITLYoWwWbg75OfRkFJ8hrWsuttR2wrRNEmvQuRlx8Bs8prdF2LeK22YUsqgmM-FqVcLeEsS_GCPxQqZwuU1av8qWcn4c6-9fac-rPdAkijS8JsNK69K9iRhu1OKeBNA-mMAPDyAaHJ_adMAy0G1Mvq_EJX2x9AFwUFapbPug6ew2aUUKa-34PJozZJGX4zSimwhM4L0PoCTG1NKxv-izO9K8HVgXEK9N7pNh_DO4Y-7CQebCfBEbFdfi4QwxGNIrcQX-DQO11Xqto63XN3oyQ6mPN8DGRYsjP_tkhLW0dYTAGG9V6AxhZjmaUjhR6HTEvZQiABNtB5VrHORqaqzzs7ROTIYU0CcBjyidau1yD0mvZVBLvSbj4C9pftMQ8KditK94kZ6l-h0Bn7Aq4-E4ept4w
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="financeiro.csv"
+Content-Type: application/excel
+
+
+< financeiro.csv
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="type"
+
+
+psel-shinier-2023
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="erp"
+
+
+Psel
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="user_id"
+
+
+1749dfee-8f1c-44b0-a4aa-94a0fc0a9008
+------WebKitFormBoundary7MA4YWxkTrZu0gW
