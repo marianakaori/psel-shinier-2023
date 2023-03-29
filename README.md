@@ -10,3 +10,27 @@ Passo a passo seguido:
 ### Subir no SGBD
 1. Baixar um SGBD (Escolhi o DBeaver)
 2. Criar uma nova *Database Connection* com o arquivo gerado nos passos anteriores
+
+
+## Extraindo informações do banco de dados
+### Estudando o banco
+Primeiro eu procurei por informações necessárias nas tabelas do banco. A tabela final possui as seguintes colunas:
+- Nome da clínica
+- Nome do paciente
+- Descrição do lançamento
+- Forma de pagamento
+- Valor a pagar
+- Valor pago
+- Data de criação do lançamento
+- Data de vencimento
+- Data de confirmação de pagamento
+- Data de recebimento
+
+Eu fiz um esboço para entender melhor as tabelas, segue em *esboco_banco_teste.png*
+
+### Extraindo Informações 
+Depois de entender melhor o banco, fiz alguns scripts em SQL para extrair as informações, até chegar no resultado. Todas as versões desses comandos estão na pasta *scripts*.
+
+## Enviando para a API
+### Configurações
+Usei o *Visual Studio Code* e instalei o plugin *REST Client
