@@ -26,10 +26,10 @@ Primeiro eu procurei por informações necessárias nas tabelas do banco. A tabe
 - Data de confirmação de pagamento
 - Data de recebimento
 
-Eu fiz um esboço para entender melhor as tabelas, segue em *esboco_banco_teste.png*
+Aqui está um [esboço](esboco_banco_teste.png) que fiz um esboço para entender melhor as tabelas.
 
 ### Extraindo Informações 
-Depois de entender melhor o banco, fiz alguns scripts em SQL para extrair as informações, até chegar no resultado. Todas as versões desses comandos estão na pasta *scripts*.
+Depois de entender melhor o banco, fiz alguns scripts em SQL para extrair as informações, até chegar no resultado. Todas as versões desses comandos estão na pasta [scripts](scripts).
 
 ## Enviando para a API
 ### Configurações
