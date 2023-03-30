@@ -32,6 +32,13 @@ Aqui está um [esboço](esboco_banco_teste.png) que fiz um esboço para entender
 Depois de entender melhor o banco, fiz alguns scripts em SQL para extrair as informações, até chegar no resultado. Todas as versões desses comandos estão na pasta [scripts](scripts).
 
 ## Enviando para a API
-Usei o *Visual Studio Code* e instalei o plugin *REST Client
+Usei o *Visual Studio Code* e instalei o plugin *REST Client*
 
 Existem duas requisições, na primeira, envio um JSON e ela retorna um bearer token e um id para usar na segunda requisição, onde mando o arquivo csv.
+
+## Automatizando o processo
+Para automatizar todas as atvidades anteriores, resolvi fazer alguns scripts em Python. 
+
+### Conexão com o banco de dados
+Para fazer a conexão utilizei uma biblioteca *firebirdsql* instalada com o seguinte comando:
+`pip install firebirdsql`
