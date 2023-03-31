@@ -1,8 +1,9 @@
+import os
+import json
 import fdb
 from fdb import services
 import csv
-import os
-import json
+import requests
 
 with open('secrets.json') as f:
     secrets = json.load(f)
@@ -54,3 +55,63 @@ with open('output.csv', 'w', newline='') as csvfile:
 # Fechando a conexão
 cursor.close()
 conn.close()
+
+with open('secrets.json') as f:
+    secrets = json.load(f)
+
+email_api = secrets['email_api']
+senha_api = secrets['senha_api']
+
+# Fazer requisição de login
+url = 'https://psel.apoena.shinier.com.br/api/login'
+data = {
+    "email": email_api,
+    "group_key": "Client",
+    "password": senha_api
+}
+response = requests.post(url, data=data)
+
+# Se login ok, fazer requisição de envio de arquivo
+if response.ok:
+    data = response.json()
+
+    token = "Bearer " + data['token'] 
+    user_id = data['user']['id']
+    
+    url = "https://psel.apoena.shinier.com.br/api/import/create"
+    headers = {
+        "Authorization": token,
+        "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
+    }
+    data = {
+        "type": "psel-shinier-2023",
+        "erp": "Psel",
+        "user_id": user_id,
+    }
+
+    # Montar o corpo da requisição com o arquivo
+    body = (
+        "------WebKitFormBoundary7MA4YWxkTrZu0gW\n"
+        'Content-Disposition: form-data; name="file"; filename="financeiro.csv"\n'
+        "Content-Type: application/excel\n\n"
+        "< output.csv\n"
+        "------WebKitFormBoundary7MA4YWxkTrZu0gW\n"
+    )
+
+    # Adicionar o corpo ao restante dos dados
+    body += "------WebKitFormBoundary7MA4YWxkTrZu0gW\n".join(
+        f'Content-Disposition: form-data; name="{key}"\n\n{value}\n'
+        for key, value in data.items()
+    ) + "------WebKitFormBoundary7MA4YWxkTrZu0gW\n"
+
+    # Fazer a requisição POST
+    response = requests.post(url, headers=headers, data=body)
+    # Verificar a resposta
+    if response.ok:
+        print("Arquivo enviado com sucesso!")
+    else:
+        print(f"Erro na requisição. Status code: {response.status_code}")
+
+else:
+    print(f"Erro na requisição do login. Status code: {response.status_code}")
+
