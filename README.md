@@ -40,7 +40,7 @@ Existem duas requisições, na primeira, envio um JSON e ela retorna um bearer t
 Para automatizar todas as atvidades anteriores, resolvi fazer alguns scripts em Python. 
 
 ### Conexão com o banco de dados
-Para fazer a conexão utilizei uma biblioteca *fbd* instalada com o seguinte comando:
-`pip install fbd`
+Para fazer a conexão utilizei uma biblioteca *fdb* instalada com o seguinte comando:
+`pip install fdb`
 
 O script da automatização pode ser encontrado [aqui](python_scripts).
