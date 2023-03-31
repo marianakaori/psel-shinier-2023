@@ -15,7 +15,7 @@ nome_arquivo_fbk = 'BancoTeste.fbk'
 nome_arquivo_fdb = 'BancoTeste.fdb'
 
 
-# verificar se o arquivo já existe na pasta
+# Verificar se o arquivo já existe na pasta
 caminho_absoluto_arquivo_fdb = os.path.abspath(caminho_pasta_bancos_de_dados + os.sep + nome_arquivo_fdb)
 caminho_absoluto_arquivo_fbk = os.path.abspath(caminho_pasta_bancos_de_dados + os.sep + nome_arquivo_fbk)
 
@@ -23,6 +23,7 @@ caminho_absoluto_arquivo_fbk = os.path.abspath(caminho_pasta_bancos_de_dados + o
 if os.path.exists(caminho_absoluto_arquivo_fdb):
     os.remove(caminho_absoluto_arquivo_fdb)  # apagar o arquivo
 
+# Restaurando o backup do banco de dados
 con = services.connect(host='localhost', user='sysdba', password=senha_firebird)
 
 con.restore(caminho_absoluto_arquivo_fbk, caminho_absoluto_arquivo_fdb)
@@ -47,7 +48,7 @@ cursor=conn.cursor()
 cursor.execute(str_query)
 
 # Criando um arquivo CSV e escrevendo os dados da consulta nele
-with open('output.csv', 'w', newline='') as csvfile:
+with open('financeiro.csv', 'w', newline='') as csvfile:
     csvwriter = csv.writer(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
     csvwriter.writerow([i[0] for i in cursor.description]) # Escreve o cabeçalho
     csvwriter.writerows(cursor.fetchall())
@@ -55,9 +56,6 @@ with open('output.csv', 'w', newline='') as csvfile:
 # Fechando a conexão
 cursor.close()
 conn.close()
-
-with open('secrets.json') as f:
-    secrets = json.load(f)
 
 email_api = secrets['email_api']
 senha_api = secrets['senha_api']
@@ -81,37 +79,26 @@ if response.ok:
     url = "https://psel.apoena.shinier.com.br/api/import/create"
     headers = {
         "Authorization": token,
-        "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW",
     }
-    data = {
+    body = {
         "type": "psel-shinier-2023",
         "erp": "Psel",
         "user_id": user_id,
     }
 
-    # Montar o corpo da requisição com o arquivo
-    body = (
-        "------WebKitFormBoundary7MA4YWxkTrZu0gW\n"
-        'Content-Disposition: form-data; name="file"; filename="financeiro.csv"\n'
-        "Content-Type: application/excel\n\n"
-        "< output.csv\n"
-        "------WebKitFormBoundary7MA4YWxkTrZu0gW\n"
-    )
-
-    # Adicionar o corpo ao restante dos dados
-    body += "------WebKitFormBoundary7MA4YWxkTrZu0gW\n".join(
-        f'Content-Disposition: form-data; name="{key}"\n\n{value}\n'
-        for key, value in data.items()
-    ) + "------WebKitFormBoundary7MA4YWxkTrZu0gW\n"
+    files = {
+        'file': ('financeiro.csv', open('financeiro.csv', 'rb'), 'application/excel')
+    }
 
     # Fazer a requisição POST
-    response = requests.post(url, headers=headers, data=body)
+    response = requests.post(url, headers=headers, data=body, files=files)
     # Verificar a resposta
     if response.ok:
         print("Arquivo enviado com sucesso!")
+        #print(response.json())
+        response.close()
     else:
         print(f"Erro na requisição. Status code: {response.status_code}")
 
 else:
     print(f"Erro na requisição do login. Status code: {response.status_code}")
-
