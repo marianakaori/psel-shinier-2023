@@ -3,3 +3,5 @@ FROM EMD101 e JOIN CRD111 c ON e.CGC_CPF = c.CGC_CPF
 LEFT JOIN BXD111 b ON b.DOCUMENTO = c.DOCUMENTO 
 WHERE e.CLIENTE = 'S'
 ORDER BY e.NOME 
+
+--script teste para entender as tabelas, sem a tabela MAN111

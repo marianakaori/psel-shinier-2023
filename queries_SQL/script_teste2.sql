@@ -5,3 +5,5 @@ UNION ALL
 SELECT '' AS nome_da_clinica, e.NOME AS nome_do_paciente, m.NOME_TIPO  AS Descricao_do_lancamento, m.TIPO_PAGTO AS Forma_de_pagamento, m.VALOR_PARCELA  AS Valor_a_pagar, m.VALOR AS valor_pago, m.EMISSAO AS data_criacao_lancamento, m.VENCTO AS data_vencimento, m.DATA_PAGTO  AS confirmacao_pagamento, m.DATA_PAGTO AS data_recebimento
 FROM EMD101 e JOIN MAN111 m ON e.CGC_CPF = m.CNPJ_CPF
 ORDER BY 2, 3
+
+-- junção da tabelas MAN111 com EMD101 e CRD111 e BXD111 com EMD101

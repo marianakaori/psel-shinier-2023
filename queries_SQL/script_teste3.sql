@@ -7,4 +7,4 @@ FROM EMD101 e JOIN MAN111 m ON e.CGC_CPF = m.CNPJ_CPF
 ORDER BY 2, 3
 FETCH FIRST 20000 ROWS ONLY;
 
---diminui o numero de linhas para que a API possa processar melhor
+--diminui o numero de linhas para que a API possa processar
